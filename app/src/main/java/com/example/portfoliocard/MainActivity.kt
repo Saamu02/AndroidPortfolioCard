@@ -8,6 +8,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -76,10 +77,11 @@ fun CreatePortfolioCard(modifier: Modifier = Modifier) {
             Column(
                 modifier = Modifier,
                 verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.Start
             ) {
-                ProfileImage()
-                
+
+                HeaderView()
+
                 HorizontalDivider(
                     modifier = Modifier
                         .padding(top = 10.dp)
@@ -90,13 +92,26 @@ fun CreatePortfolioCard(modifier: Modifier = Modifier) {
 }
 
 @Composable
+private fun HeaderView() {
+    Row(
+        modifier = Modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        ProfileImage()
+
+        UserDetailedView()
+    }
+}
+
+@Composable
 private fun ProfileImage(modifier: Modifier = Modifier) {
 
     Surface(
         modifier = Modifier
-            .size(150.dp)
+            .size(120.dp)
             .padding(5.dp)
-            .padding(top = 5.dp),
+            .padding(top = 5.dp)
+            .padding(),
         shape = CircleShape,
         border = BorderStroke(
             width = 0.5.dp,
@@ -108,8 +123,36 @@ private fun ProfileImage(modifier: Modifier = Modifier) {
         Image(
             painter = painterResource(id = R.drawable.profile_image),
             contentDescription = "profile image",
-            modifier = Modifier.size(130.dp),
+            modifier = Modifier.size(100.dp),
             contentScale = ContentScale.Crop
+        )
+    }
+}
+
+@Composable
+private fun UserDetailedView() {
+    Column(
+        modifier = Modifier
+            .padding(5.dp)
+    ) {
+
+        Text(
+            text = "Ussama Irfan",
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.primaryContainer
+        )
+
+        Text(
+            text = "Mobile Developer",
+            modifier = Modifier
+                .padding(top = 5.dp)
+        )
+
+        Text(
+            text = "iusamairfan@gmail.com",
+            modifier = Modifier
+                .padding(top = 5.dp),
+            style = MaterialTheme.typography.titleSmall
         )
     }
 }
